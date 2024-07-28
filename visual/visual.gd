@@ -9,6 +9,9 @@ var canvas_drag_pos := Vector2(0, 0)
 var canvas_dragging := false
 var dot_gap := 30
 var full_redraw = false
+var target_scale := 1.0
+var current_scale := 1.0
+var scale_tween: Tween
 
 func _load_dir(path: String) -> Array:
 	var dir = DirAccess.open(path)
@@ -41,6 +44,7 @@ func _ready():
 	load_thread = Thread.new()
 	load_thread.start(_load_thread_func)
 	_full_redraw()
+	scale_tween = self.get_tree().create_tween().bind_node(self)
 
 func _process(delta):
 	get_node("../Info").text = "FPS: %d\nDir: %s\nLoaded: %d" % [
@@ -58,6 +62,25 @@ func _process(delta):
 	else:
 		canvas_dragging = false
 	self.position = canvas_pos
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_zoom_in()
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_zoom_out()
+
+func _zoom_in():
+	var delta_scale = 0.1
+	target_scale = current_scale + delta_scale
+	scale_tween.tween_property(self, "scale", Vector2(target_scale, target_scale), 0.5)
+	current_scale = target_scale
+
+func _zoom_out():
+	var delta_scale = -0.1
+	target_scale = current_scale + delta_scale
+	scale_tween.tween_property(self, "scale", Vector2(target_scale, target_scale), 0.5)
+	current_scale = target_scale
 
 func _full_redraw():
 	full_redraw = true

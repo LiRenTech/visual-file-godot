@@ -6,6 +6,7 @@
 [node name="Visual" type="Node2D"]
 
 [node name="Canvas" type="Node2D" parent="."]
+scale = Vector2(-1, -1)
 script = ExtResource("1_wp1mi")
 
 [node name="Button" type="Button" parent="Canvas"]
