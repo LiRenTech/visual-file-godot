@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Global="*res://global.gd"
 
+[gui]
+
+theme/custom_font="res://LXGWWenKai-Regular.ttf"
+
 [internationalization]
 
 rendering/root_node_layout_direction=1
