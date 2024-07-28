@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c61cort8o36ri"]
+[gd_scene load_steps=3 format=3 uid="uid://c61cort8o36ri"]
 
 [ext_resource type="Script" path="res://visual/visual.gd" id="1_wp1mi"]
+[ext_resource type="Script" path="res://settings.gd" id="2_vw6dv"]
 
 [node name="Visual" type="Node2D"]
 script = ExtResource("1_wp1mi")
@@ -12,9 +13,14 @@ offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 33.0
 
-[node name="TextEdit" type="TextEdit" parent="."]
-unique_name_in_owner = true
-offset_left = 349.0
-offset_top = 130.0
-offset_right = 822.0
-offset_bottom = 443.0
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 442.0
+offset_top = 110.0
+offset_right = 752.0
+offset_bottom = 432.0
+columns = 2
+script = ExtResource("2_vw6dv")
+
+[node name="CheckButton" type="CheckButton" parent="GridContainer"]
+layout_mode = 2
+text = "111111111111111"
