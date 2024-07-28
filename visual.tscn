@@ -4,23 +4,73 @@
 [ext_resource type="Script" path="res://settings.gd" id="2_vw6dv"]
 
 [node name="Visual" type="Node2D"]
+
+[node name="Canvas" type="Node2D" parent="."]
 script = ExtResource("1_wp1mi")
+
+[node name="Button" type="Button" parent="Canvas"]
+offset_left = 447.0
+offset_top = 257.0
+offset_right = 711.0
+offset_bottom = 380.0
+text = "我是好康的游戏画面
+:)"
 
 [node name="Info" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 33.0
+offset_left = 879.0
+offset_top = 300.0
+offset_right = 972.0
+offset_bottom = 323.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 442.0
-offset_top = 110.0
-offset_right = 752.0
-offset_bottom = 432.0
+offset_left = 883.0
+offset_top = 42.0
+offset_right = 1111.0
+offset_bottom = 607.0
 columns = 2
 script = ExtResource("2_vw6dv")
 
-[node name="CheckButton" type="CheckButton" parent="GridContainer"]
+[node name="Label" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "111111111111111"
+size_flags_horizontal = 3
+text = "最大帧率"
+
+[node name="FPS" type="OptionButton" parent="GridContainer"]
+layout_mode = 2
+item_count = 3
+selected = 1
+popup/item_0/text = "30"
+popup/item_0/id = 0
+popup/item_1/text = "60"
+popup/item_1/id = 1
+popup/item_2/text = "无限制"
+popup/item_2/id = 2
+
+[node name="Label2" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "返回首页"
+
+[node name="BackToHome" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "action"
+
+[node name="Label4" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "显示网格"
+
+[node name="ShowDotGrid" type="CheckButton" parent="GridContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Label3" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "显示坐标"
+
+[node name="ShowVec" type="CheckButton" parent="GridContainer"]
+layout_mode = 2
+
+[connection signal="item_selected" from="GridContainer/FPS" to="GridContainer" method="_on_fps_item_selected"]
+[connection signal="pressed" from="GridContainer/BackToHome" to="GridContainer" method="_on_back_to_home_pressed"]
+[connection signal="toggled" from="GridContainer/ShowDotGrid" to="GridContainer" method="_on_show_dot_grid_toggled"]
+[connection signal="toggled" from="GridContainer/ShowVec" to="GridContainer" method="_on_show_vec_toggled"]
