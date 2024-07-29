@@ -6,14 +6,13 @@
 [node name="Visual" type="Node2D"]
 
 [node name="Canvas" type="Node2D" parent="."]
-scale = Vector2(-1, -1)
 script = ExtResource("1_wp1mi")
 
 [node name="Button" type="Button" parent="Canvas"]
-offset_left = 447.0
-offset_top = 257.0
-offset_right = 711.0
-offset_bottom = 380.0
+offset_left = 387.0
+offset_top = 187.0
+offset_right = 750.0
+offset_bottom = 404.0
 text = "我是好康的游戏画面
 :)"
 

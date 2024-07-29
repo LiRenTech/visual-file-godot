@@ -8,10 +8,8 @@ var canvas_pos := Vector2(0, 0)
 var canvas_drag_pos := Vector2(0, 0)
 var canvas_dragging := false
 var dot_gap := 30
-var full_redraw = false
 var target_scale := 1.0
 var current_scale := 1.0
-var scale_tween: Tween
 
 func _load_dir(path: String) -> Array:
 	var dir = DirAccess.open(path)
@@ -43,8 +41,6 @@ func _load_thread_func():
 func _ready():
 	load_thread = Thread.new()
 	load_thread.start(_load_thread_func)
-	_full_redraw()
-	scale_tween = self.get_tree().create_tween().bind_node(self)
 
 func _process(delta):
 	get_node("../Info").text = "FPS: %d\nDir: %s\nLoaded: %d" % [
@@ -66,33 +62,14 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_zoom_in()
+			#_zoom_in()
+			pass
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			_zoom_out()
-
-func _zoom_in():
-	var delta_scale = 0.1
-	target_scale = current_scale + delta_scale
-	scale_tween.tween_property(self, "scale", Vector2(target_scale, target_scale), 0.5)
-	current_scale = target_scale
-
-func _zoom_out():
-	var delta_scale = -0.1
-	target_scale = current_scale + delta_scale
-	scale_tween.tween_property(self, "scale", Vector2(target_scale, target_scale), 0.5)
-	current_scale = target_scale
-
-func _full_redraw():
-	full_redraw = true
-	queue_redraw()
+			#_zoom_out()
+			pass
 
 func _draw():
-	if full_redraw:
-		full_redraw = false
-		_draw_dot_grid()
-		return
-	if canvas_dragging and Global.show_dot_grid:
-		_draw_dot_grid()
+	_draw_dot_grid()
 
 func _draw_dot_grid():
 	var start_pos := canvas_pos
@@ -116,7 +93,8 @@ func _draw_dot_grid():
 		drew.x -= dot_gap
 		while drew.x - start_pos.x <= get_viewport_rect().size.x:
 			var vec = Vector2(int(drew.x / dot_gap), int(drew.y / dot_gap))
-			draw_circle(drew, 2, Color(0.1, 0.1, 0.1))
+			if Global.show_dot_grid:
+				draw_circle(drew, 2, Color(0.1, 0.1, 0.1))
 			if Global.show_vec:
 				draw_string(
 					font,
